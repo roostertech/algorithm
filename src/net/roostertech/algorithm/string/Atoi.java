@@ -1,5 +1,6 @@
 package net.roostertech.algorithm.string;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -44,6 +45,11 @@ public class Atoi {
 
     @Test
     public void testAtoi() {
-        atoi("7 U 0 T7165 0128862 089 39 5");
+        Assert.assertEquals(7, atoi("7 U 0 T7165 0128862 089 39 5"));
+        Assert.assertEquals(0, atoi("abb 1"));
+        Assert.assertEquals(-1, atoi("-1"));
+        Assert.assertEquals(0, atoi("- 1"));
+        Assert.assertEquals(1, atoi("+1"));
+        Assert.assertEquals(0, atoi("- 1"));
     }
 }
