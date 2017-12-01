@@ -3,6 +3,7 @@ package net.roostertech.algorithm.array;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by pnguyen on 11/24/17.
@@ -36,6 +37,42 @@ public class PascalTriangle {
 
         System.out.println(getRow(4));
         System.out.println(getRow(5));
+
+    }
+
+    public ArrayList<ArrayList<Integer>> generate(int a) {
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+        if (a == 0) {
+            return result;
+        }
+
+        result.add(new ArrayList<>(Arrays.asList(1)));
+        if (a == 1) {
+            return result;
+        }
+
+        for (int i = 1; i < a; i++) {
+            ArrayList<Integer> row = new ArrayList<>();
+            ArrayList<Integer> prior = result.get(i - 1);
+            row.add(1);
+
+            for (int j = 0; j < i - 1; j++) {
+                row.add(prior.get(j)+ prior.get(j+1));
+            }
+
+            row.add(1);
+            result.add(row);
+        }
+
+        return result;
+    }
+
+    @Test
+    public void testGenerate() {
+//        generate(1);
+//        generate(2);
+//        generate(3);
+        generate(4);
 
     }
 }
