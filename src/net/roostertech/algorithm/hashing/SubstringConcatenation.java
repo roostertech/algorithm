@@ -122,6 +122,8 @@ public class SubstringConcatenation {
         findSubstring("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", Arrays.asList("aaa", "aaa", "aaa", "aaa", "aaa"));
         findSubstring("barfoothefoobarman", Arrays.asList("foo","bar"));
         findSubstring("foobangbazABCbazfoobang", Arrays.asList("baz","foo","bang"));
+        findSubstring("bcabbcaabbccacacbabccacaababcbb", Arrays.asList("c", "b", "a", "c", "a", "a", "a", "b", "c"));
+
 //        findSubstring("acaaacbcbccbaabaccabcbbcaaccbbbbcbabaacbbcbccababb", Arrays.asList("cabccbbbc", "abbccabbc", "bbbcbbbaa", "acbaabcab", "ccacabccb", "bbacaabca", "acacbaacb", "aabbcccab", "ccccbbcaa", "baaccaabc"));
     }
 }
