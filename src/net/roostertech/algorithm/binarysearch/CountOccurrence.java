@@ -1,5 +1,9 @@
 package net.roostertech.algorithm.binarysearch;
 
+import junit.framework.Assert;
+import org.junit.Test;
+
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -46,5 +50,14 @@ public class CountOccurrence {
         }
         int high = binarySearch(a, b, false);
         return high - low + 1;
+    }
+
+    @Test
+    public void countOccurrence() {
+        Assert.assertEquals(0, findCount(Arrays.asList(1, 2, 3, 4, 5, 5, 5, 7, 8, 8, 9, 10), 6));
+        Assert.assertEquals(3, findCount(Arrays.asList(1,2,3,4,5,5,5,7,8,8,9,10), 5));
+        Assert.assertEquals(2, findCount(Arrays.asList(1,2,3,4,5,5,5,7,8,8,9,10), 8));
+        Assert.assertEquals(0, findCount(Arrays.asList(1), 8));
+
     }
 }
