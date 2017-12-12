@@ -1,9 +1,7 @@
 package net.roostertech.algorithm.linkedlist;
 
-import net.roostertech.algorithm.ListNode;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**

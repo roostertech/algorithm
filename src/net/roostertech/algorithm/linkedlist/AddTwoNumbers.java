@@ -1,7 +1,5 @@
 package net.roostertech.algorithm.linkedlist;
 
-import net.roostertech.algorithm.ListNode;
-
 /**
  * Created by pnguyen on 12/7/17.
  */

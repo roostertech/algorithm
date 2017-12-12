@@ -1,6 +1,5 @@
 package net.roostertech.algorithm.linkedlist;
 
-import net.roostertech.algorithm.ListNode;
 import org.junit.Before;
 import org.junit.Test;
 

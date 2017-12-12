@@ -1,4 +1,4 @@
-package net.roostertech.algorithm;
+package net.roostertech.algorithm.linkedlist;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ public class ListNode {
     public int val;
     public ListNode next;
 
-    ListNode(int x) {
+    public ListNode(int x) {
         val = x;
         next = null;
     }
@@ -41,4 +41,5 @@ public class ListNode {
 
         return head;
     }
+
 }
