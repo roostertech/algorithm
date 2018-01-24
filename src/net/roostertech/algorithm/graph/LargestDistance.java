@@ -6,92 +6,114 @@ import org.junit.Test;
 import java.util.*;
 
 public class LargestDistance {
+    class Node {
+        int label;
+        HashSet<Node> neighbors;
 
-    // NOT TIME OPTIMIZED
+        Node(int label) {
+            this.label = label;
+            neighbors = new HashSet<>();
+        }
+
+    }
 
     public int solve(ArrayList<Integer> A) {
-        if (A.size()== 0) {
+        if (A.size() == 0) {
             return 0;
         }
-        HashMap<Integer, UndirectedGraphNode> nodes = new HashMap<>();
 
+
+        HashMap<Integer, Node> nodes = new HashMap<>();
+
+        // build the graph!
         for (int i = 0; i < A.size(); i++) {
-            UndirectedGraphNode node;
+            Node node;
             if (nodes.containsKey(i)) {
                 node = nodes.get(i);
             } else {
-                node = new UndirectedGraphNode(i);
+                node = new Node(i);
                 nodes.put(i, node);
             }
 
-            // root node
-            int parent = A.get(i);
-            if (parent == -1) {
+            int neighbor = A.get(i);
+            if (neighbor == -1) {
                 continue;
             }
 
-            UndirectedGraphNode parentNode;
-            if (nodes.containsKey(parent)) {
-                parentNode = nodes.get(parent);
+            Node neighborNode;
+            if (nodes.containsKey(neighbor)) {
+                neighborNode = nodes.get(neighbor);
             } else {
-                parentNode = new UndirectedGraphNode(parent);
-                nodes.put(parent, parentNode);
+                neighborNode = new Node(neighbor);
+                nodes.put(neighbor, neighborNode);
             }
 
-            parentNode.neighbors.add(node);
+            neighborNode.neighbors.add(node);
+            node.neighbors.add(neighborNode);
         }
 
-        System.out.println(nodes.get(0).toString());
-        int longest = 0;
-        for (int i = 0; i < A.size(); i++) {
-            for (int j = i+1; j < A.size(); j++) {
-                int distance = distance(i, j, nodes, A, new HashSet<>());
-//                System.out.println(i + " -> " + j + " " + distance);
-                if (distance > longest) {
-                    longest = distance;
+        // BFS walk
+        Node root = nodes.get(0);
+
+        Queue<Node> nodeQueue = new LinkedList<>();
+        Queue<Integer> levels = new LinkedList<>();
+
+        nodeQueue.offer(root);
+        levels.offer(0);
+
+        int maxLevel = 0;
+        Node furthestNode = null;
+        HashSet<Node> visited = new HashSet<>();
+
+        while (!nodeQueue.isEmpty()) {
+            Node currNode = nodeQueue.poll();
+            int currLevel = levels.poll();
+            visited.add(currNode);
+
+            if (currLevel >= maxLevel) {
+                maxLevel = currLevel;
+                furthestNode = currNode;
+            }
+
+            for (Node n : currNode.neighbors) {
+                if (visited.contains(n)) {
+                    continue;
                 }
+                nodeQueue.offer(n);
+                levels.offer(currLevel + 1);
             }
         }
 
-        return longest;
-    }
 
-    int distance(int i, int j, HashMap<Integer, UndirectedGraphNode> nodes, ArrayList<Integer> parents, Set<Integer> searched) {
-        if (i == j) {
-            return 0;
-        }
-        searched.add(i);
+        // second BFS to find furthest point from furthest node
+        nodeQueue.offer(furthestNode);
+        levels.offer(0);
 
-        int shortestPath = Integer.MAX_VALUE;
-        int parent = parents.get(i);
-        if (parent != -1 && !searched.contains(parent)) {
-            searched.add(parent);
-            int distance = distance(parent, j, nodes, parents, searched);
-            if (distance != Integer.MAX_VALUE) {
-                distance += 1;
-                if (distance < shortestPath) {
-                    shortestPath = distance;
+        maxLevel = 0;
+        visited.clear();
+        while (!nodeQueue.isEmpty()) {
+            Node currNode = nodeQueue.poll();
+            int currLevel = levels.poll();
+            visited.add(currNode);
+
+
+            if (currLevel > maxLevel) {
+                maxLevel = currLevel;
+                furthestNode = currNode;
+            }
+
+            for (Node n : currNode.neighbors) {
+                if (visited.contains(n)) {
+                    continue;
                 }
+                nodeQueue.offer(n);
+                levels.offer(currLevel + 1);
             }
         }
 
-        for (UndirectedGraphNode neighbor : nodes.get(i).neighbors) {
-            if (searched.contains(neighbor.label)) {
-                continue;
-            }
-            searched.add(neighbor.label);
-            int distance = distance(neighbor.label, j, nodes, parents, searched);
-            // no path
-            if (distance == Integer.MAX_VALUE) {
-                continue;
-            }
+        return maxLevel;
 
-            distance += 1;
-            if (distance < shortestPath) {
-                shortestPath = distance;
-            }
-        }
-        return shortestPath;
+
     }
 
 
@@ -103,7 +125,7 @@ public class LargestDistance {
 
         Assert.assertEquals(14, solve(new ArrayList<>(Arrays.asList(
                 -1, 0, 1, 1, 2, 0, 5, 0, 3, 0,
-                 0, 2, 3, 1, 12, 14, 0, 5, 9, 6,
+                0, 2, 3, 1, 12, 14, 0, 5, 9, 6,
                 16, 0, 13, 4, 17, 2, 1, 22, 14, 20,
                 10, 17, 0, 32, 15, 34, 10, 19, 3, 22,
                 29, 2, 36, 16, 15, 37, 38, 27, 31, 12,

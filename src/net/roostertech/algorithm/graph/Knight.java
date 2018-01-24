@@ -6,8 +6,6 @@ import org.junit.Test;
 import java.util.LinkedList;
 import java.util.Queue;
 
-
-// NOT SPACE OPTIMIZED
 public class Knight {
 
     class Cell {
@@ -52,13 +50,12 @@ public class Knight {
                 return cell.dis;
             }
 
-            visited[cell.x][cell.y] = true;
-
             for (int i = 0; i < 8; i++) {
                 int moveX = cell.x + dx[i];
                 int moveY = cell.y + dy[i];
                 if (isInside(moveX, moveY, N, M) && !visited[moveX][moveY]) {
                     System.out.println(cell.x + "," + cell.y  + " -> " + moveX + ","+ moveY);
+                    visited[moveX][moveY] = true;
                     moveQueue.offer(new Cell(moveX, moveY, cell.dis + 1));
                 }
             }
