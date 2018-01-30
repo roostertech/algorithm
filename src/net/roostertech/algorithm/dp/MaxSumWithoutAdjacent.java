@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+// https://www.interviewbit.com/problems/max-sum-without-adjacent-elements/
 public class MaxSumWithoutAdjacent {
     public int adjacent(ArrayList<ArrayList<Integer>> A) {
         ArrayList<Integer> topArray = A.get(0);
