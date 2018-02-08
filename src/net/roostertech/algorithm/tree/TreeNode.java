@@ -40,4 +40,15 @@ public class TreeNode {
 
         return A.val == B.val && compare(A.left, B.left) && compare(A.right, B.right);
     }
+
+    public static void printInorder(TreeNode node)
+    {
+        if (node == null) {
+            return;
+        }
+        printInorder(node.left);
+        System.out.print(node.val + " ");
+        printInorder(node.right);
+    }
+
 }
