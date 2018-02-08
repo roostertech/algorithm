@@ -1,6 +1,10 @@
 package net.roostertech.algorithm.array;
 
+import junit.framework.Assert;
+import org.junit.Test;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -55,5 +59,18 @@ public class KthSmallest {
             smallests.remove(smallests.size() - 1);
         }
         return smallests.get(smallests.size() -1);
+    }
+
+    @Test
+    public void heapMethod() {
+        List<Integer> data = Arrays.asList(2, 1, 4, 3, 2);
+
+
+        KthSmallest alg = new KthSmallest();
+        Assert.assertEquals(1, alg.kthsmallest(data, 1));
+        Assert.assertEquals(2, alg.kthsmallest(data, 2));
+        Assert.assertEquals(2, alg.kthsmallest(data, 3));
+        Assert.assertEquals(3, alg.kthsmallest(data, 4));
+
     }
 }

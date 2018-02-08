@@ -1,5 +1,7 @@
 package net.roostertech.algorithm.array;
 
+import org.junit.Test;
+
 import java.util.ArrayList;
 
 /**
@@ -41,5 +43,23 @@ public class ConcentricRectangle {
             }
         }
         return result;
+    }
+
+    @Test
+    public void rects() {
+        printRect(prettyPrint(1));
+        printRect(prettyPrint(2));
+        printRect(prettyPrint(3));
+        printRect(prettyPrint(4));
+    }
+
+    void printRect(ArrayList<ArrayList<Integer>> rect) {
+        for (ArrayList<Integer> row : rect) {
+            for (int data : row) {
+                System.out.print(data);
+            }
+            System.out.println(" ");
+        }
+        System.out.println(" ");
     }
 }

@@ -1,6 +1,8 @@
 package net.roostertech.algorithm.linkedlist;
 
-import net.roostertech.algorithm.ListNode;
+import org.junit.Test;
+
+import java.util.Arrays;
 
 /**
  *
@@ -84,7 +86,27 @@ public class Subtract {
             prev = itorSecondHalf;
             itorSecondHalf = tmp;
         }
-
         return a;
+    }
+
+
+    @Test
+    public void singleItem() {
+        ListNode input = ListNode.makeList(Arrays.asList(1));
+        ListNode result = subtract(input);
+        System.out.println(result);
+    }
+    @Test
+    public void shortList() {
+        ListNode input = ListNode.makeList(Arrays.asList(1,2,3,4,5,6,7,8,9,10));
+        ListNode result = subtract(input);
+        System.out.println(result);
+    }
+
+    @Test
+    public void oddItemList() {
+        ListNode input = ListNode.makeList(Arrays.asList(1,2,3,4,5,6,7));
+        ListNode result = subtract(input);
+        System.out.println(result);
     }
 }
