@@ -1,7 +1,10 @@
 package net.roostertech.algorithm.dp;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 public class Edit {
-    public static int editDistance(String start, String end) {
+    public static int minDistance(String start, String end) {
         int startLen = start.length();
         int endLen = end.length();
 
@@ -35,5 +38,10 @@ public class Edit {
         }
 
         return edits[startLen][endLen];
+    }
+
+    @Test
+    public void testEditDistance() {
+        Assert.assertEquals(2, minDistance("Anshuman", "Antihuman"));
     }
 }
