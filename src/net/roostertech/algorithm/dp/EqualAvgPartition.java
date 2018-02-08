@@ -51,9 +51,11 @@ public class EqualAvgPartition {
         sum1 = sum2 * size1 / size2
         sum = sum1 + sum2
         sum1 = (sum - sum1) * (size1 / (size - size1))
-
-        sum1/size1 = (sum - sum1) / (size - size1)
-        ...
+        size - size1 = (sum - sum1) * size1 / sum1
+        size - size1 = (sum * size1 - sum1 * size1) / sum1
+        size = (sum * size1 - sum1 * size1) / sum1 + size1 * sum1 / sum1
+        size = (sum * size1) / sum1
+        size * sum1 = sum * size1
         sum1 / size1 = sum / size
          */
         // Try to find a set that have the same avg
